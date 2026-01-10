@@ -1,0 +1,406 @@
+/* ========================================
+   MiniShop - Custom Stylesheet
+   Modern and Professional Design
+   ======================================== */
+
+/* ========== Global Styles ========== */
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #0dcaf0;
+    --light-bg: #f8f9fa;
+    --dark-bg: #212529;
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+}
+
+/* ========== Typography ========== */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+a {
+    transition: all var(--transition-speed) ease;
+}
+
+/* ========== Navigation Bar ========== */
+.navbar {
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    transition: transform var(--transition-speed) ease;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.05);
+}
+
+.nav-link {
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    transition: all var(--transition-speed) ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    transform: translateY(-2px);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: all var(--transition-speed) ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 70%;
+}
+
+/* Badge for cart count */
+.badge {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 50%;
+    position: relative;
+    top: -5px;
+}
+
+/* ========== Hero Section ========== */
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 4rem 0 !important;
+}
+
+.hero-section h1 {
+    animation: fadeInUp 0.8s ease;
+}
+
+.hero-section p {
+    animation: fadeInUp 1s ease;
+}
+
+.hero-section .btn {
+    animation: fadeInUp 1.2s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== Cards ========== */
+.card {
+    transition: all var(--transition-speed) ease;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.hover-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important;
+}
+
+.card-img-top {
+    height: 250px;
+    object-fit: cover;
+    transition: transform var(--transition-speed) ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.1);
+}
+
+/* ========== Features Section ========== */
+.features-section {
+    background-color: white;
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-speed) ease;
+}
+
+.hover-card:hover .feature-icon {
+    transform: rotate(360deg) scale(1.1);
+}
+
+/* ========== Buttons ========== */
+.btn {
+    border-radius: 8px;
+    padding: 0.6rem 1.5rem;
+    font-weight: 500;
+    transition: all var(--transition-speed) ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* ========== Forms ========== */
+.form-control,
+.form-select {
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    padding: 0.75rem 1rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+.form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+/* ========== Alerts ========== */
+.alert {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    animation: slideInDown 0.5s ease;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== Product Cards ========== */
+.product-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card .card-body {
+    padding: 1.5rem;
+}
+
+.product-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--success-color);
+}
+
+.product-stock {
+    font-size: 0.875rem;
+    color: var(--secondary-color);
+}
+
+.out-of-stock {
+    color: var(--danger-color);
+    font-weight: 600;
+}
+
+/* ========== Shopping Cart ========== */
+.cart-item {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all var(--transition-speed) ease;
+}
+
+.cart-item:hover {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.cart-total {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+/* ========== Stats Section ========== */
+.stat-item {
+    padding: 2rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.stat-item:hover {
+    transform: scale(1.05);
+}
+
+/* ========== Footer ========== */
+.footer {
+    margin-top: auto;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+}
+
+.footer a:hover {
+    color: var(--primary-color) !important;
+}
+
+/* ========== Tables ========== */
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+/* ========== Pagination ========== */
+.pagination {
+    gap: 0.5rem;
+}
+
+.page-link {
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: all var(--transition-speed) ease;
+}
+
+.page-link:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.page-item.active .page-link {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: transparent;
+}
+
+/* ========== Loading Spinner ========== */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* ========== Responsive Design ========== */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .hero-section .lead {
+        font-size: 1rem;
+    }
+
+    .stat-item h3 {
+        font-size: 2rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+}
+
+/* ========== Utilities ========== */
+.shadow-custom {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.rounded-custom {
+    border-radius: 15px;
+}
+
+.transition-all {
+    transition: all var(--transition-speed) ease;
+}
+
+/* ========== Dark Mode Support (Optional) ========== */
+@media (prefers-color-scheme: dark) {
+    /* Uncomment to enable dark mode
+    body {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+    }
+
+    .card {
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+    }
+    */
+}
+
+/* ========== Print Styles ========== */
+@media print {
+    .navbar,
+    .footer,
+    .btn {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+}
