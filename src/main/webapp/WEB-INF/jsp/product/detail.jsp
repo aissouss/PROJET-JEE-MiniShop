@@ -135,7 +135,7 @@
                         <c:when test="${product.stock > 0}">
                             <c:choose>
                                 <c:when test="${sessionScope.user != null}">
-                                    <!-- Add to Cart form (will be implemented in Palier 3) -->
+                                    <!-- Add to Cart form -->
                                     <form method="post" action="${pageContext.request.contextPath}/cart/add">
                                         <input type="hidden" name="productId" value="${product.id}">
                                         <div class="input-group mb-3">
