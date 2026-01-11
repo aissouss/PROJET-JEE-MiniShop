@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 /**
@@ -79,9 +78,9 @@ public class LoginServlet extends HttpServlet {
         }
 
         // Attempt authentication
-        Optional<User> userOptional = authService.authenticate(email, password);
+        User user = authService.login(email, password);
 
-        if (userOptional.isEmpty()) {
+        if (user == null) {
             LOGGER.warning("Failed login attempt for email: " + email);
 
             request.setAttribute("errorMessage", "Email ou mot de passe incorrect");
@@ -89,8 +88,6 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher(AppConstants.JSP_LOGIN).forward(request, response);
             return;
         }
-
-        User user = userOptional.get();
 
         // Create session and store user
         HttpSession session = request.getSession(true);
