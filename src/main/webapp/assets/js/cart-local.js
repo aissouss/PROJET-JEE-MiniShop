@@ -58,6 +58,9 @@
      * Update cart count badge in navigation
      */
     function updateCartBadge(count) {
+        if (isUserLoggedIn()) {
+            return;
+        }
         const badge = document.querySelector('.cart-count-badge');
         if (badge) {
             if (count > 0) {
@@ -179,11 +182,21 @@
      * Initialize guest cart on page load
      */
     function initGuestCart() {
+        if (isUserLoggedIn()) {
+            return;
+        }
         // Update cart badge on page load
         const count = getGuestCartCount();
         updateCartBadge(count);
 
         console.log('Guest cart initialized with', count, 'items');
+    }
+
+    /**
+     * Check if user is logged in based on presence of user menu
+     */
+    function isUserLoggedIn() {
+        return document.getElementById('userDropdown') !== null;
     }
 
     // Initialize on DOM ready

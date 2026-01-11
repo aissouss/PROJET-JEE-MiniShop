@@ -120,6 +120,4 @@
     </c:choose>
 </div>
 
-<script src="${pageContext.request.contextPath}/assets/js/cart-merge.js"></script>
-
 <%@ include file="/WEB-INF/jsp/common/footer.jspf" %>

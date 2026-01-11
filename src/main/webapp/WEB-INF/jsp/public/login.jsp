@@ -96,43 +96,12 @@
                         </div>
                     </form>
 
-                    <!-- Divider -->
                     <div class="text-center my-4">
-                        <span class="text-muted">ou</span>
-                    </div>
-
-                    <!-- Register Link -->
-                    <div class="text-center">
-                        <p class="mb-0">
-                            Vous n'avez pas de compte ?
-                            <a href="${pageContext.request.contextPath}/register" class="text-decoration-none fw-bold">
-                                Créer un compte
-                            </a>
-                        </p>
+                        <span class="text-muted">Accès au catalogue après connexion</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Demo Credentials -->
-            <div class="card mt-3 border-info">
-                <div class="card-body">
-                    <h6 class="card-title text-info">
-                        <i class="bi bi-info-circle me-2"></i>
-                        Comptes de démonstration
-                    </h6>
-                    <div class="small">
-                        <p class="mb-1">
-                            <strong>Utilisateur :</strong> john.doe@example.com
-                        </p>
-                        <p class="mb-1">
-                            <strong>Admin :</strong> admin@minishop.com
-                        </p>
-                        <p class="mb-0 text-muted">
-                            Mot de passe : <code>password123</code>
-                        </p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -172,8 +141,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-
-<!-- Cart merge script -->
-<script src="${pageContext.request.contextPath}/assets/js/cart-merge.js"></script>
 
 <%@ include file="/WEB-INF/jsp/common/footer.jspf" %>

@@ -63,21 +63,19 @@ public class CartRemoveServlet extends HttpServlet {
             }
 
             // Remove from cart
-            boolean success = cartService.removeFromCart(session, productId);
-
-            if (success) {
-                session.setAttribute(AppConstants.SESSION_SUCCESS_MESSAGE,
-                    "Produit retiré du panier");
-                LOGGER.info("Product removed from cart: " + productId);
-            } else {
-                session.setAttribute(AppConstants.SESSION_ERROR_MESSAGE,
-                    "Impossible de retirer le produit du panier");
-                LOGGER.warning("Failed to remove product from cart: " + productId);
-            }
+            cartService.removeFromCart(session, productId);
+            session.setAttribute(AppConstants.SESSION_SUCCESS_MESSAGE,
+                "Produit retiré du panier");
+            LOGGER.info("Product removed from cart: " + productId);
 
             // Redirect to cart page
             response.sendRedirect(request.getContextPath() + AppConstants.SERVLET_CART);
 
+        } catch (IllegalArgumentException e) {
+            LOGGER.log(Level.WARNING, "Unable to remove product from cart", e);
+            session.setAttribute(AppConstants.SESSION_ERROR_MESSAGE,
+                "Impossible de retirer le produit du panier");
+            response.sendRedirect(request.getContextPath() + AppConstants.SERVLET_CART);
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error removing product from cart", e);
             session.setAttribute(AppConstants.SESSION_ERROR_MESSAGE,

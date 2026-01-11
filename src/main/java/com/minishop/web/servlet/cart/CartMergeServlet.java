@@ -158,12 +158,12 @@ public class CartMergeServlet extends HttpServlet {
 
                 // Add to cart if valid
                 if (productId > 0 && quantity > 0) {
-                    boolean success = cartService.addToCart(session, productId, quantity);
-                    if (success) {
+                    try {
+                        cartService.addToCart(session, productId, quantity);
                         itemsAdded++;
                         LOGGER.info("Added to cart: productId=" + productId + ", quantity=" + quantity);
-                    } else {
-                        LOGGER.warning("Failed to add to cart: productId=" + productId);
+                    } catch (IllegalArgumentException e) {
+                        LOGGER.log(Level.WARNING, "Failed to add to cart: productId=" + productId, e);
                     }
                 }
             }

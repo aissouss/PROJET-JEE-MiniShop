@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,7 +29,7 @@ public class ProductDaoJdbc implements ProductDao {
     private final DbConfig dbConfig;
 
     public ProductDaoJdbc() {
-        this.dbConfig = DbConfig.getInstance();
+        this.dbConfig = new DbConfig();
     }
 
     @Override
@@ -53,7 +52,7 @@ public class ProductDaoJdbc implements ProductDao {
     }
 
     @Override
-    public Optional<Product> findById(long id) {
+    public Product findById(long id) {
         try (Connection conn = dbConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(SQL_FIND_BY_ID)) {
 
@@ -61,14 +60,14 @@ public class ProductDaoJdbc implements ProductDao {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return Optional.of(mapResultSetToProduct(rs));
+                return mapResultSetToProduct(rs);
             }
 
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Error finding product by ID: " + id, e);
         }
 
-        return Optional.empty();
+        return null;
     }
 
     private Product mapResultSetToProduct(ResultSet rs) throws SQLException {

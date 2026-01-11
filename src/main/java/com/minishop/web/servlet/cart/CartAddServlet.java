@@ -88,21 +88,20 @@ public class CartAddServlet extends HttpServlet {
             }
 
             // Add to cart
-            boolean success = cartService.addToCart(session, productId, quantity);
-
-            if (success) {
-                session.setAttribute(AppConstants.SESSION_SUCCESS_MESSAGE,
-                    "Produit ajouté au panier avec succès");
-                LOGGER.info("Product added to cart: " + productId + " x" + quantity);
-            } else {
-                session.setAttribute(AppConstants.SESSION_ERROR_MESSAGE,
-                    "Impossible d'ajouter le produit au panier. Vérifiez la disponibilité.");
-                LOGGER.warning("Failed to add product to cart: " + productId);
-            }
+            cartService.addToCart(session, productId, quantity);
+            session.setAttribute(AppConstants.SESSION_SUCCESS_MESSAGE,
+                "Produit ajouté au panier avec succès");
+            LOGGER.info("Product added to cart: " + productId + " x" + quantity);
 
             // Redirect to cart page
             response.sendRedirect(request.getContextPath() + AppConstants.SERVLET_CART);
 
+        } catch (IllegalArgumentException e) {
+            LOGGER.log(Level.WARNING, "Unable to add product to cart", e);
+            session.setAttribute(AppConstants.SESSION_ERROR_MESSAGE,
+                "Impossible d'ajouter le produit au panier. Vérifiez la disponibilité.");
+            response.sendRedirect(request.getContextPath() +
+                AppConstants.SERVLET_PRODUCT_DETAIL + "?id=" + request.getParameter("productId"));
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error adding product to cart", e);
             session.setAttribute(AppConstants.SESSION_ERROR_MESSAGE,

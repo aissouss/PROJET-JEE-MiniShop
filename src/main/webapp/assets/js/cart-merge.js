@@ -111,8 +111,8 @@
             localStorage.removeItem('minishop_cart_count');
             console.log('Guest cart cleared from localStorage');
 
-            // Update badge to 0
-            if (window.MiniShopGuestCart) {
+            // Update badge for guest users only
+            if (!isUserLoggedIn() && window.MiniShopGuestCart) {
                 const badge = document.querySelector('.cart-count-badge');
                 if (badge) {
                     badge.style.display = 'none';

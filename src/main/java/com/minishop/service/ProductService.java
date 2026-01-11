@@ -5,7 +5,6 @@ import com.minishop.dao.impl.ProductDaoJdbc;
 import com.minishop.model.Product;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,12 +38,12 @@ public class ProductService {
         }
     }
 
-    public Optional<Product> getProductById(long id) {
+    public Product getProductById(long id) {
         try {
             return productDao.findById(id);
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error getting product by ID: " + id, e);
-            return Optional.empty();
+            return null;
         }
     }
 }

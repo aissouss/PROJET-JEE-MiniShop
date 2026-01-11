@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -58,17 +57,15 @@ public class ProductDetailServlet extends HttpServlet {
             }
 
             // Get product from service
-            Optional<Product> productOpt = productService.getProductById(productId);
+            Product product = productService.getProductById(productId);
 
-            if (productOpt.isEmpty()) {
+            if (product == null) {
                 LOGGER.warning("Product not found: " + productId);
                 request.getSession().setAttribute(AppConstants.SESSION_ERROR_MESSAGE,
                     "Le produit demandé n'existe pas.");
                 response.sendRedirect(request.getContextPath() + AppConstants.SERVLET_PRODUCTS);
                 return;
             }
-
-            Product product = productOpt.get();
 
             // Set attributes for JSP
             request.setAttribute("product", product);

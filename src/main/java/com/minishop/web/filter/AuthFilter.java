@@ -14,16 +14,15 @@ import java.util.logging.Logger;
 /**
  * Authentication filter
  * Protects /app/* routes - redirects to login if user is not authenticated
- * As per specification: protects /app/* and /admin/*
  */
-@WebFilter(filterName = "AuthFilter", urlPatterns = {"/app/*", "/admin/*"})
+@WebFilter(filterName = "AuthFilter", urlPatterns = {"/app/*"})
 public class AuthFilter implements Filter {
 
     private static final Logger LOGGER = Logger.getLogger(AuthFilter.class.getName());
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        LOGGER.info("AuthFilter initialized - protecting /app/* and /admin/*");
+        LOGGER.info("AuthFilter initialized - protecting /app/*");
     }
 
     @Override
@@ -54,17 +53,6 @@ public class AuthFilter implements Filter {
             }
 
             response.sendRedirect(contextPath + AppConstants.SERVLET_LOGIN + "?redirect=" + redirectUrl);
-            return;
-        }
-
-        // Check admin access for /admin/* routes
-        if (path.startsWith("/admin/") && !user.isAdmin()) {
-            LOGGER.warning("Non-admin user attempted to access admin page: " + user.getEmail() + " -> " + path);
-
-            session.setAttribute(AppConstants.SESSION_ERROR_MESSAGE,
-                    "Accès refusé. Vous devez être administrateur pour accéder à cette page.");
-
-            response.sendRedirect(contextPath + AppConstants.SERVLET_HOME);
             return;
         }
 

@@ -42,6 +42,7 @@
     <!-- MiniShop Global Scripts -->
     <script src="${pageContext.request.contextPath}/assets/js/theme.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/cart-local.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/cart-merge.js"></script>
 
     <!-- Custom JS (if needed) -->
     <script>

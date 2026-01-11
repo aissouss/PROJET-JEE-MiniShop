@@ -38,9 +38,9 @@ public class LoginServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
 
-        // If user is already logged in, redirect to home
+        // If user is already logged in, redirect to products
         if (session != null && session.getAttribute(AppConstants.AUTH_USER) != null) {
-            response.sendRedirect(request.getContextPath() + AppConstants.SERVLET_HOME);
+            response.sendRedirect(request.getContextPath() + AppConstants.SERVLET_PRODUCTS);
             return;
         }
 
@@ -106,12 +106,12 @@ public class LoginServlet extends HttpServlet {
 
         LOGGER.info("User logged in successfully: " + user.getEmail());
 
-        // Redirect to original URL or home page
+        // Redirect to original URL or products page
         String targetUrl;
         if (redirectUrl != null && !redirectUrl.isEmpty() && isValidRedirectUrl(redirectUrl)) {
             targetUrl = request.getContextPath() + redirectUrl;
         } else {
-            targetUrl = request.getContextPath() + AppConstants.SERVLET_HOME;
+            targetUrl = request.getContextPath() + AppConstants.SERVLET_PRODUCTS;
         }
 
         response.sendRedirect(targetUrl);

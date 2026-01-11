@@ -6,8 +6,6 @@ import com.minishop.model.Product;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -67,51 +65,42 @@ public class CartService {
      * @param quantity  the quantity to add
      * @return true if successful, false otherwise
      */
-    public boolean addToCart(HttpSession session, long productId, int quantity) {
-        try {
-            // Validate inputs
-            if (session == null) {
-                LOGGER.warning("Cannot add to cart: session is null");
-                return false;
-            }
-
-            if (quantity <= 0) {
-                LOGGER.warning("Cannot add to cart: invalid quantity " + quantity);
-                return false;
-            }
-
-            // Get product
-            Optional<Product> productOpt = productService.getProductById(productId);
-            if (productOpt.isEmpty()) {
-                LOGGER.warning("Cannot add to cart: product not found " + productId);
-                return false;
-            }
-
-            Product product = productOpt.get();
-
-            // Check stock
-            if (quantity > product.getStock()) {
-                LOGGER.warning("Cannot add to cart: insufficient stock for product " + productId +
-                             " (requested: " + quantity + ", available: " + product.getStock() + ")");
-                return false;
-            }
-
-            // Get or create cart
-            Cart cart = getOrCreateCart(session);
-
-            // Add product to cart
-            cart.addProduct(product, quantity);
-
-            // Update cart count in session
-            updateCartCount(session, cart);
-
-            LOGGER.info("Added to cart: " + product.getName() + " x" + quantity);
-            return true;
-
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error adding product to cart: " + productId, e);
-            return false;
+    public void addToCart(HttpSession session, long productId, int quantity) {
+        // Validate inputs
+        if (session == null) {
+            LOGGER.warning("Cannot add to cart: session is null");
+            throw new IllegalArgumentException("Session required");
         }
+
+        if (quantity <= 0) {
+            LOGGER.warning("Cannot add to cart: invalid quantity " + quantity);
+            throw new IllegalArgumentException("Invalid quantity");
+        }
+
+        // Get product
+        Product product = productService.getProductById(productId);
+        if (product == null) {
+            LOGGER.warning("Cannot add to cart: product not found " + productId);
+            throw new IllegalArgumentException("Product not found");
+        }
+
+        // Check stock
+        if (quantity > product.getStock()) {
+            LOGGER.warning("Cannot add to cart: insufficient stock for product " + productId +
+                         " (requested: " + quantity + ", available: " + product.getStock() + ")");
+            throw new IllegalArgumentException("Insufficient stock");
+        }
+
+        // Get or create cart
+        Cart cart = getOrCreateCart(session);
+
+        // Add product to cart
+        cart.addProduct(product, quantity);
+
+        // Update cart count in session
+        updateCartCount(session, cart);
+
+        LOGGER.info("Added to cart: " + product.getName() + " x" + quantity);
     }
 
     /**
@@ -122,31 +111,25 @@ public class CartService {
      * @param quantity  the new quantity
      * @return true if successful, false otherwise
      */
-    public boolean updateQuantity(HttpSession session, long productId, int quantity) {
-        try {
-            if (session == null) {
-                return false;
-            }
-
-            Cart cart = getOrCreateCart(session);
-
-            if (quantity <= 0) {
-                // Remove item if quantity is 0 or negative
-                return removeFromCart(session, productId);
-            }
-
-            cart.updateQuantity(productId, quantity);
-
-            // Update cart count in session
-            updateCartCount(session, cart);
-
-            LOGGER.info("Updated cart quantity for product " + productId + ": " + quantity);
-            return true;
-
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error updating cart quantity: " + productId, e);
-            return false;
+    public void updateQuantity(HttpSession session, long productId, int quantity) {
+        if (session == null) {
+            throw new IllegalArgumentException("Session required");
         }
+
+        Cart cart = getOrCreateCart(session);
+
+        if (quantity <= 0) {
+            // Remove item if quantity is 0 or negative
+            removeFromCart(session, productId);
+            return;
+        }
+
+        cart.updateQuantity(productId, quantity);
+
+        // Update cart count in session
+        updateCartCount(session, cart);
+
+        LOGGER.info("Updated cart quantity for product " + productId + ": " + quantity);
     }
 
     /**
@@ -156,25 +139,18 @@ public class CartService {
      * @param productId the product ID
      * @return true if successful, false otherwise
      */
-    public boolean removeFromCart(HttpSession session, long productId) {
-        try {
-            if (session == null) {
-                return false;
-            }
-
-            Cart cart = getOrCreateCart(session);
-            cart.removeProduct(productId);
-
-            // Update cart count in session
-            updateCartCount(session, cart);
-
-            LOGGER.info("Removed from cart: product " + productId);
-            return true;
-
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error removing product from cart: " + productId, e);
-            return false;
+    public void removeFromCart(HttpSession session, long productId) {
+        if (session == null) {
+            throw new IllegalArgumentException("Session required");
         }
+
+        Cart cart = getOrCreateCart(session);
+        cart.removeProduct(productId);
+
+        // Update cart count in session
+        updateCartCount(session, cart);
+
+        LOGGER.info("Removed from cart: product " + productId);
     }
 
     /**
