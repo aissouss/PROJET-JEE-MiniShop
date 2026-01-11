@@ -79,4 +79,67 @@ public class ProductDaoJdbc implements ProductDao {
         product.setStock(rs.getInt("stock"));
         return product;
     }
+
+    // Admin CRUD methods
+
+    @Override
+    public void create(Product product) {
+        String sql = "INSERT INTO products (name, description, price_cents, stock) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = dbConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, product.getName());
+            stmt.setString(2, product.getDescription());
+            stmt.setInt(3, product.getPriceCents());
+            stmt.setInt(4, product.getStock());
+
+            int rowsAffected = stmt.executeUpdate();
+            LOGGER.info("Product created: " + product.getName() + " (rows: " + rowsAffected + ")");
+
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error creating product", e);
+            throw new RuntimeException("Failed to create product", e);
+        }
+    }
+
+    @Override
+    public void update(Product product) {
+        String sql = "UPDATE products SET name = ?, description = ?, price_cents = ?, stock = ? WHERE id = ?";
+
+        try (Connection conn = dbConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, product.getName());
+            stmt.setString(2, product.getDescription());
+            stmt.setInt(3, product.getPriceCents());
+            stmt.setInt(4, product.getStock());
+            stmt.setLong(5, product.getId());
+
+            int rowsAffected = stmt.executeUpdate();
+            LOGGER.info("Product updated: " + product.getName() + " (rows: " + rowsAffected + ")");
+
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error updating product ID: " + product.getId(), e);
+            throw new RuntimeException("Failed to update product", e);
+        }
+    }
+
+    @Override
+    public void delete(long id) {
+        String sql = "DELETE FROM products WHERE id = ?";
+
+        try (Connection conn = dbConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setLong(1, id);
+
+            int rowsAffected = stmt.executeUpdate();
+            LOGGER.info("Product deleted: ID " + id + " (rows: " + rowsAffected + ")");
+
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error deleting product ID: " + id, e);
+            throw new RuntimeException("Failed to delete product", e);
+        }
+    }
 }

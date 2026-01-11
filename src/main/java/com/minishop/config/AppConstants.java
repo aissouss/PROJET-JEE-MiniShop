@@ -28,6 +28,10 @@ public final class AppConstants {
     public static final String JSP_ERROR_404 = "/WEB-INF/jsp/error/404.jsp";
     public static final String JSP_ERROR_500 = "/WEB-INF/jsp/error/500.jsp";
 
+    // Admin JSP Paths
+    public static final String JSP_ADMIN_PRODUCTS = "/WEB-INF/jsp/admin/products.jsp";
+    public static final String JSP_ADMIN_PRODUCT_FORM = "/WEB-INF/jsp/admin/product-form.jsp";
+
     // Servlet Mappings (protected routes use /app/* prefix)
     public static final String SERVLET_HOME = "/home";
     public static final String SERVLET_LOGIN = "/login";
@@ -38,6 +42,12 @@ public final class AppConstants {
     public static final String SERVLET_CART_ADD = "/app/cart/add";
     public static final String SERVLET_CART_REMOVE = "/app/cart/remove";
     public static final String SERVLET_CART_MERGE = "/app/cart/merge";
+
+    // Admin Servlet Mappings
+    public static final String SERVLET_ADMIN_PRODUCTS = "/admin/products";
+    public static final String SERVLET_ADMIN_PRODUCT_CREATE = "/admin/products/create";
+    public static final String SERVLET_ADMIN_PRODUCT_EDIT = "/admin/products/edit";
+    public static final String SERVLET_ADMIN_PRODUCT_DELETE = "/admin/products/delete";
     // Private constructor to prevent instantiation
     private AppConstants() {
         throw new AssertionError("Cannot instantiate constants class");

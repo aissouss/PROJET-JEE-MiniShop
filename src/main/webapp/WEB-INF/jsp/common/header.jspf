@@ -42,6 +42,13 @@
                     </li>
                     <c:choose>
                         <c:when test="${sessionScope.AUTH_USER != null}">
+                            <c:if test="${sessionScope.AUTH_USER.role == 'ADMIN'}">
+                                <li class="nav-item">
+                                    <a class="nav-link text-warning" href="${pageContext.request.contextPath}/admin/products">
+                                        <i class="bi bi-shield-check"></i> Admin
+                                    </a>
+                                </li>
+                            </c:if>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/app/cart">
                                     <i class="bi bi-cart"></i> Panier

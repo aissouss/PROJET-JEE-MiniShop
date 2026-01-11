@@ -135,6 +135,12 @@ Tous les comptes utilisent le mot de passe : **`password123`** (hashé en SHA-25
 - Email: `marie.dupont@example.com`
 - Rôle: USER
 
+### Accès administration
+Pour accéder à l'interface d'administration :
+1. Se connecter avec le compte admin ci-dessus
+2. Cliquer sur "Admin" (texte jaune) dans la navbar
+3. Gérer les produits (liste, créer, modifier, supprimer)
+
 ## 🎯 Fonctionnalités complètes (Tous les paliers)
 
 ### ✅ Palier 0 - Démarrage
@@ -170,6 +176,13 @@ Tous les comptes utilisent le mot de passe : **`password123`** (hashé en SHA-25
 - ✅ Fusion automatique après connexion (cart-merge.js)
 - ✅ Servlet de fusion (CartMergeServlet)
 - ✅ Gestion des thèmes avec LocalStorage (theme.js)
+
+### ✅ Module Admin (Bonus - Section VI.E)
+- ✅ AdminFilter protégeant /admin/*
+- ✅ CRUD complet produits (Créer, Modifier, Supprimer)
+- ✅ Interface d'administration moderne
+- ✅ Validation des données
+- ✅ Accessible uniquement aux utilisateurs ADMIN
 
 ## 📊 Base de données
 

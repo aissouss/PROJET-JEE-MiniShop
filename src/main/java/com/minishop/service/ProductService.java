@@ -46,4 +46,36 @@ public class ProductService {
             return null;
         }
     }
+
+    // Admin methods
+
+    public void createProduct(Product product) {
+        try {
+            productDao.create(product);
+            LOGGER.info("Admin created product: " + product.getName());
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error creating product", e);
+            throw new RuntimeException("Failed to create product", e);
+        }
+    }
+
+    public void updateProduct(Product product) {
+        try {
+            productDao.update(product);
+            LOGGER.info("Admin updated product: " + product.getName());
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error updating product", e);
+            throw new RuntimeException("Failed to update product", e);
+        }
+    }
+
+    public void deleteProduct(long id) {
+        try {
+            productDao.delete(id);
+            LOGGER.info("Admin deleted product ID: " + id);
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error deleting product", e);
+            throw new RuntimeException("Failed to delete product", e);
+        }
+    }
 }
