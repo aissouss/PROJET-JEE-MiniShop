@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * Cart remove servlet
  * Removes a product from the shopping cart
  */
-@WebServlet(name = "CartRemoveServlet", urlPatterns = {"/cart/remove"})
+@WebServlet(name = "CartRemoveServlet", urlPatterns = {"/app/cart/remove"})
 public class CartRemoveServlet extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(CartRemoveServlet.class.getName());
@@ -46,7 +46,7 @@ public class CartRemoveServlet extends HttpServlet {
             if (productIdParam == null || productIdParam.trim().isEmpty()) {
                 session.setAttribute(AppConstants.SESSION_ERROR_MESSAGE,
                     "Identifiant du produit manquant");
-                response.sendRedirect(request.getContextPath() + "/cart");
+                response.sendRedirect(request.getContextPath() + AppConstants.SERVLET_CART);
                 return;
             }
 
@@ -58,7 +58,7 @@ public class CartRemoveServlet extends HttpServlet {
                 LOGGER.warning("Invalid product ID format: " + productIdParam);
                 session.setAttribute(AppConstants.SESSION_ERROR_MESSAGE,
                     "Identifiant du produit invalide");
-                response.sendRedirect(request.getContextPath() + "/cart");
+                response.sendRedirect(request.getContextPath() + AppConstants.SERVLET_CART);
                 return;
             }
 
@@ -76,13 +76,13 @@ public class CartRemoveServlet extends HttpServlet {
             }
 
             // Redirect to cart page
-            response.sendRedirect(request.getContextPath() + "/cart");
+            response.sendRedirect(request.getContextPath() + AppConstants.SERVLET_CART);
 
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error removing product from cart", e);
             session.setAttribute(AppConstants.SESSION_ERROR_MESSAGE,
                 "Une erreur est survenue lors de la suppression");
-            response.sendRedirect(request.getContextPath() + "/cart");
+            response.sendRedirect(request.getContextPath() + AppConstants.SERVLET_CART);
         }
     }
 
@@ -92,6 +92,6 @@ public class CartRemoveServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect(request.getContextPath() + "/cart");
+        response.sendRedirect(request.getContextPath() + AppConstants.SERVLET_CART);
     }
 }

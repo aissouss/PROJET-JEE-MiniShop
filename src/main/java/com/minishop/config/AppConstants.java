@@ -11,9 +11,9 @@ public final class AppConstants {
     public static final String DB_PASSWORD = "";
     public static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
 
-    // Session Attributes
-    public static final String SESSION_USER = "user";
-    public static final String SESSION_CART = "cart";
+    // Session Attributes (as per specification)
+    public static final String AUTH_USER = "AUTH_USER";
+    public static final String CART = "CART";
     public static final String SESSION_CART_COUNT = "cartCount";
 
     // Session Messages
@@ -29,31 +29,34 @@ public final class AppConstants {
     public static final int DEFAULT_PAGE_SIZE = 12;
     public static final int ADMIN_PAGE_SIZE = 20;
 
-    // JSP Paths
+    // JSP Paths (as per specification)
     public static final String JSP_HOME = "/WEB-INF/jsp/public/home.jsp";
-    public static final String JSP_LOGIN = "/WEB-INF/jsp/auth/login.jsp";
-    public static final String JSP_REGISTER = "/WEB-INF/jsp/auth/register.jsp";
-    public static final String JSP_PRODUCTS = "/WEB-INF/jsp/product/list.jsp";
-    public static final String JSP_PRODUCT_DETAIL = "/WEB-INF/jsp/product/detail.jsp";
-    public static final String JSP_CART = "/WEB-INF/jsp/cart/cart.jsp";
-    public static final String JSP_CHECKOUT = "/WEB-INF/jsp/cart/checkout.jsp";
-    public static final String JSP_ORDER_CONFIRMATION = "/WEB-INF/jsp/cart/confirmation.jsp";
-    public static final String JSP_PROFILE = "/WEB-INF/jsp/user/profile.jsp";
-    public static final String JSP_ORDERS = "/WEB-INF/jsp/user/orders.jsp";
+    public static final String JSP_LOGIN = "/WEB-INF/jsp/public/login.jsp";
+    public static final String JSP_REGISTER = "/WEB-INF/jsp/public/register.jsp";
+    public static final String JSP_PRODUCTS = "/WEB-INF/jsp/public/products.jsp";
+    public static final String JSP_PRODUCT_DETAIL = "/WEB-INF/jsp/public/product-detail.jsp";
+    public static final String JSP_CART = "/WEB-INF/jsp/app/cart.jsp";
+    public static final String JSP_CHECKOUT = "/WEB-INF/jsp/app/checkout.jsp";
+    public static final String JSP_ORDER_CONFIRMATION = "/WEB-INF/jsp/app/confirmation.jsp";
+    public static final String JSP_PROFILE = "/WEB-INF/jsp/app/profile.jsp";
+    public static final String JSP_ORDERS = "/WEB-INF/jsp/app/orders.jsp";
     public static final String JSP_ERROR_404 = "/WEB-INF/jsp/error/404.jsp";
     public static final String JSP_ERROR_500 = "/WEB-INF/jsp/error/500.jsp";
 
-    // Servlet Mappings
+    // Servlet Mappings (protected routes use /app/* prefix)
     public static final String SERVLET_HOME = "/home";
     public static final String SERVLET_LOGIN = "/login";
     public static final String SERVLET_LOGOUT = "/logout";
     public static final String SERVLET_REGISTER = "/register";
     public static final String SERVLET_PRODUCTS = "/products";
     public static final String SERVLET_PRODUCT_DETAIL = "/product";
-    public static final String SERVLET_CART = "/cart";
-    public static final String SERVLET_CHECKOUT = "/checkout";
-    public static final String SERVLET_PROFILE = "/profile";
-    public static final String SERVLET_ORDERS = "/orders";
+    public static final String SERVLET_CART = "/app/cart";
+    public static final String SERVLET_CART_ADD = "/app/cart/add";
+    public static final String SERVLET_CART_REMOVE = "/app/cart/remove";
+    public static final String SERVLET_CART_MERGE = "/app/cart/merge";
+    public static final String SERVLET_CHECKOUT = "/app/checkout";
+    public static final String SERVLET_PROFILE = "/app/profile";
+    public static final String SERVLET_ORDERS = "/app/orders";
 
     // Validation
     public static final int MIN_PASSWORD_LENGTH = 6;

@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         // If user is already logged in, redirect to home
-        if (session != null && session.getAttribute(AppConstants.SESSION_USER) != null) {
+        if (session != null && session.getAttribute(AppConstants.AUTH_USER) != null) {
             response.sendRedirect(request.getContextPath() + AppConstants.SERVLET_HOME);
             return;
         }
@@ -94,7 +94,7 @@ public class LoginServlet extends HttpServlet {
 
         // Create session and store user
         HttpSession session = request.getSession(true);
-        session.setAttribute(AppConstants.SESSION_USER, user);
+        session.setAttribute(AppConstants.AUTH_USER, user);
 
         // Set session timeout based on "remember me"
         if ("on".equals(rememberMe)) {

@@ -1,5 +1,6 @@
 package com.minishop.web.servlet.cart;
 
+import com.minishop.config.AppConstants;
 import com.minishop.service.CartService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
  * Accepts JSON: [{productId: 1, quantity: 2}, ...]
  * Returns JSON: {success: true, message: "...", itemsAdded: 3}
  */
-@WebServlet(name = "CartMergeServlet", urlPatterns = {"/cart/merge"})
+@WebServlet(name = "CartMergeServlet", urlPatterns = {"/app/cart/merge"})
 public class CartMergeServlet extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(CartMergeServlet.class.getName());
@@ -47,8 +48,8 @@ public class CartMergeServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         try {
-            // Check if user is logged in
-            if (session == null || session.getAttribute("user") == null) {
+            // Check if user is logged in (using AUTH_USER constant)
+            if (session == null || session.getAttribute(AppConstants.AUTH_USER) == null) {
                 sendErrorResponse(out, "Utilisateur non connecté");
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
@@ -218,6 +219,6 @@ public class CartMergeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect(request.getContextPath() + "/cart");
+        response.sendRedirect(request.getContextPath() + AppConstants.SERVLET_CART);
     }
 }

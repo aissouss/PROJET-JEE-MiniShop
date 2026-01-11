@@ -26,13 +26,23 @@ public class PasswordUtil {
      * @return the hashed password
      */
     public static String hashPassword(String password) {
+        return sha256(password);
+    }
+
+    /**
+     * SHA-256 hash function as per specification
+     *
+     * @param input the input string to hash
+     * @return hex-encoded SHA-256 hash
+     */
+    public static String sha256(String input) {
         try {
             MessageDigest digest = MessageDigest.getInstance(HASH_ALGORITHM);
-            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            byte[] hash = digest.digest(input.getBytes(StandardCharsets.UTF_8));
             return bytesToHex(hash);
         } catch (NoSuchAlgorithmException e) {
-            LOGGER.log(Level.SEVERE, "Error hashing password", e);
-            throw new RuntimeException("Failed to hash password", e);
+            LOGGER.log(Level.SEVERE, "Error with SHA-256 hashing", e);
+            throw new RuntimeException("Failed to hash input", e);
         }
     }
 

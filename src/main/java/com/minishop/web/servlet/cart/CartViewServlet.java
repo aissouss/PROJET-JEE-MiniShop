@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * Cart view servlet
  * Displays the shopping cart
  */
-@WebServlet(name = "CartViewServlet", urlPatterns = {"/cart"})
+@WebServlet(name = "CartViewServlet", urlPatterns = {"/app/cart"})
 public class CartViewServlet extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(CartViewServlet.class.getName());

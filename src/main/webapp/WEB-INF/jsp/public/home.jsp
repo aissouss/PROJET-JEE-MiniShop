@@ -19,7 +19,7 @@
                     <a href="${pageContext.request.contextPath}/products" class="btn btn-primary btn-lg">
                         <i class="bi bi-grid"></i> Voir les produits
                     </a>
-                    <c:if test="${sessionScope.user == null}">
+                    <c:if test="${sessionScope.AUTH_USER == null}">
                         <a href="${pageContext.request.contextPath}/register" class="btn btn-outline-primary btn-lg">
                             <i class="bi bi-person-plus"></i> S'inscrire
                         </a>
@@ -89,7 +89,7 @@
             Inscrivez-vous dès maintenant et profitez de nos offres exclusives !
         </p>
         <c:choose>
-            <c:when test="${sessionScope.user != null}">
+            <c:when test="${sessionScope.AUTH_USER != null}">
                 <a href="${pageContext.request.contextPath}/products" class="btn btn-light btn-lg">
                     <i class="bi bi-grid"></i> Explorer les produits
                 </a>
