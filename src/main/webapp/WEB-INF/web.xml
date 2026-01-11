@@ -9,8 +9,10 @@
     <description>Mini e-commerce web application</description>
 
     <!-- Welcome File List -->
+    <!-- Note: HomeServlet is mapped to "" so the root URL redirects to home -->
     <welcome-file-list>
-        <welcome-file>home</welcome-file>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
     <!-- Session Configuration (30 minutes timeout) -->

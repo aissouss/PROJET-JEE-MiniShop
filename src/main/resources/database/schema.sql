@@ -138,12 +138,13 @@ CREATE TABLE order_items (
 -- ============================================
 -- Sample Data: Users
 -- Password for all users: "password123"
+-- MD5 hash of "password123" = 482c811da5d5b4bc6d497ffa98491e38
 -- (In production, use bcrypt or similar hashing)
 -- ============================================
 INSERT INTO users (email, password_hash, full_name, role) VALUES
-('admin@minishop.com', 'e10adc3949ba59abbe56e057f20f883e', 'Admin User', 'ADMIN'),
-('john.doe@example.com', 'e10adc3949ba59abbe56e057f20f883e', 'John Doe', 'USER'),
-('jane.smith@example.com', 'e10adc3949ba59abbe56e057f20f883e', 'Jane Smith', 'USER');
+('admin@minishop.com', '482c811da5d5b4bc6d497ffa98491e38', 'Admin User', 'ADMIN'),
+('john.doe@example.com', '482c811da5d5b4bc6d497ffa98491e38', 'John Doe', 'USER'),
+('jane.smith@example.com', '482c811da5d5b4bc6d497ffa98491e38', 'Jane Smith', 'USER');
 
 -- ============================================
 -- Sample Data: Products

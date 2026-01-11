@@ -236,7 +236,7 @@ public class CartService {
      */
     private void updateCartCount(HttpSession session, Cart cart) {
         if (session != null && cart != null) {
-            session.setAttribute(AppConstants.CART_COUNT, cart.getItemCount());
+            session.setAttribute(AppConstants.SESSION_CART_COUNT, cart.getItemCount());
         }
     }
 
@@ -251,7 +251,7 @@ public class CartService {
             return 0;
         }
 
-        Integer count = (Integer) session.getAttribute(AppConstants.CART_COUNT);
+        Integer count = (Integer) session.getAttribute(AppConstants.SESSION_CART_COUNT);
         return count != null ? count : 0;
     }
 }
