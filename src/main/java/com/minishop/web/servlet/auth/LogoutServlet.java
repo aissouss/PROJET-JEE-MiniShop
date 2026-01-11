@@ -46,7 +46,7 @@ public class LogoutServlet extends HttpServlet {
 
         if (session != null) {
             // Get user for logging before invalidating session
-            User user = (User) session.getAttribute(AppConstants.SESSION_USER);
+            User user = (User) session.getAttribute(AppConstants.AUTH_USER);
 
             if (user != null) {
                 LOGGER.info("User logging out: " + user.getEmail());

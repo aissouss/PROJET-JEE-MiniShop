@@ -25,7 +25,7 @@
 
         // Prepare context path
         const basePath = contextPath || '';
-        const mergeUrl = basePath + '/cart/merge';
+        const mergeUrl = basePath + '/app/cart/merge';
 
         // Send cart data to server
         return fetch(mergeUrl, {

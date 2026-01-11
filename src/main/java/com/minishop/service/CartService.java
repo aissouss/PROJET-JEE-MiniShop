@@ -46,10 +46,10 @@ public class CartService {
             throw new IllegalArgumentException("Session cannot be null");
         }
 
-        Cart cart = (Cart) session.getAttribute(AppConstants.SESSION_CART);
+        Cart cart = (Cart) session.getAttribute(AppConstants.CART);
         if (cart == null) {
             cart = new Cart();
-            session.setAttribute(AppConstants.SESSION_CART, cart);
+            session.setAttribute(AppConstants.CART, cart);
             LOGGER.info("Created new cart in session");
         }
 
@@ -236,7 +236,7 @@ public class CartService {
      */
     private void updateCartCount(HttpSession session, Cart cart) {
         if (session != null && cart != null) {
-            session.setAttribute(AppConstants.SESSION_CART_COUNT, cart.getItemCount());
+            session.setAttribute(AppConstants.CART_COUNT, cart.getItemCount());
         }
     }
 
@@ -251,7 +251,7 @@ public class CartService {
             return 0;
         }
 
-        Integer count = (Integer) session.getAttribute(AppConstants.SESSION_CART_COUNT);
+        Integer count = (Integer) session.getAttribute(AppConstants.CART_COUNT);
         return count != null ? count : 0;
     }
 }

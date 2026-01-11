@@ -41,9 +41,9 @@
                         </a>
                     </li>
                     <c:choose>
-                        <c:when test="${sessionScope.user != null}">
+                        <c:when test="${sessionScope.AUTH_USER != null}">
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/cart">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/app/cart">
                                     <i class="bi bi-cart"></i> Panier
                                     <c:if test="${sessionScope.cartCount > 0}">
                                         <span class="badge bg-danger cart-count-badge">${sessionScope.cartCount}</span>
@@ -55,7 +55,7 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
-                                    <i class="bi bi-person-circle"></i> ${sessionScope.user.fullName}
+                                    <i class="bi bi-person-circle"></i> ${sessionScope.AUTH_USER.fullName}
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/profile">Mon profil</a></li>

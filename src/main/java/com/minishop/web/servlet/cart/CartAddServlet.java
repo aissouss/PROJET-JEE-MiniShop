@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * Cart add servlet
  * Adds a product to the shopping cart
  */
-@WebServlet(name = "CartAddServlet", urlPatterns = {"/cart/add"})
+@WebServlet(name = "CartAddServlet", urlPatterns = {"/app/cart/add"})
 public class CartAddServlet extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(CartAddServlet.class.getName());
@@ -101,7 +101,7 @@ public class CartAddServlet extends HttpServlet {
             }
 
             // Redirect to cart page
-            response.sendRedirect(request.getContextPath() + "/cart");
+            response.sendRedirect(request.getContextPath() + AppConstants.SERVLET_CART);
 
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error adding product to cart", e);

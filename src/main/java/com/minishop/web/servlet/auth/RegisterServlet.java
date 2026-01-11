@@ -42,7 +42,7 @@ public class RegisterServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         // If user is already logged in, redirect to home
-        if (session != null && session.getAttribute(AppConstants.SESSION_USER) != null) {
+        if (session != null && session.getAttribute(AppConstants.AUTH_USER) != null) {
             response.sendRedirect(request.getContextPath() + AppConstants.SERVLET_HOME);
             return;
         }
@@ -93,7 +93,7 @@ public class RegisterServlet extends HttpServlet {
 
         // Auto-login the user after successful registration
         HttpSession session = request.getSession(true);
-        session.setAttribute(AppConstants.SESSION_USER, user);
+        session.setAttribute(AppConstants.AUTH_USER, user);
         session.setAttribute(AppConstants.SESSION_SUCCESS_MESSAGE,
                 "Bienvenue sur MiniShop, " + user.getFullName() + " ! Votre compte a été créé avec succès.");
 
