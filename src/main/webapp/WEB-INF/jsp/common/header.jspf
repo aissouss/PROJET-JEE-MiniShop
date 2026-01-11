@@ -58,9 +58,6 @@
                                     <i class="bi bi-person-circle"></i> ${sessionScope.AUTH_USER.fullName}
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/profile">Mon profil</a></li>
-                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/orders">Mes commandes</a></li>
-                                    <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Déconnexion</a></li>
                                 </ul>
                             </li>

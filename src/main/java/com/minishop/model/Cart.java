@@ -209,7 +209,7 @@ public class Cart implements Serializable {
             CartItem item = entry.getValue();
             Product product = item.getProduct();
 
-            if (!product.isActive() || product.getStock() == 0) {
+            if (product.getStock() == 0) {
                 // Product no longer available
                 toRemove.add(entry.getKey());
                 messages.add(product.getName() + " n'est plus disponible et a été retiré du panier");

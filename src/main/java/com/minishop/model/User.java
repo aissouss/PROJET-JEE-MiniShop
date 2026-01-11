@@ -1,58 +1,36 @@
 package com.minishop.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * User entity representing a user in the system
+ * User entity representing a user in the system.
  */
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private long id;
     private String email;
     private String passwordHash;
     private String fullName;
-    private UserRole role;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private LocalDateTime lastLogin;
-    private boolean active;
+    private String role;
 
-    /**
-     * User roles enumeration
-     */
-    public enum UserRole {
-        USER, ADMIN
-    }
-
-    // Constructors
     public User() {
-        this.active = true;
-        this.role = UserRole.USER;
     }
 
-    public User(String email, String passwordHash, String fullName) {
-        this();
+    public User(String email, String passwordHash, String fullName, String role) {
         this.email = email;
         this.passwordHash = passwordHash;
         this.fullName = fullName;
-    }
-
-    public User(Long id, String email, String passwordHash, String fullName, UserRole role) {
-        this(email, passwordHash, fullName);
-        this.id = id;
         this.role = role;
     }
 
-    // Getters and Setters
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -80,62 +58,24 @@ public class User implements Serializable {
         this.fullName = fullName;
     }
 
-    public UserRole getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(UserRole role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getLastLogin() {
-        return lastLogin;
-    }
-
-    public void setLastLogin(LocalDateTime lastLogin) {
-        this.lastLogin = lastLogin;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    // Helper methods
     public boolean isAdmin() {
-        return role == UserRole.ADMIN;
+        return "ADMIN".equalsIgnoreCase(role);
     }
 
-    public boolean isUser() {
-        return role == UserRole.USER;
-    }
-
-    // equals, hashCode, toString
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(email, user.email);
+        return id == user.id && Objects.equals(email, user.email);
     }
 
     @Override
@@ -149,9 +89,7 @@ public class User implements Serializable {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", fullName='" + fullName + '\'' +
-                ", role=" + role +
-                ", active=" + active +
-                ", createdAt=" + createdAt +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

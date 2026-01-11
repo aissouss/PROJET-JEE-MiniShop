@@ -89,12 +89,6 @@ public class CartService {
 
             Product product = productOpt.get();
 
-            // Check if product is available
-            if (!product.isAvailable()) {
-                LOGGER.warning("Cannot add to cart: product not available " + productId);
-                return false;
-            }
-
             // Check stock
             if (quantity > product.getStock()) {
                 LOGGER.warning("Cannot add to cart: insufficient stock for product " + productId +
