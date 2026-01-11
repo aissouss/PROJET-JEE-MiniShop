@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="context-path" content="${pageContext.request.contextPath}">
     <title>${pageTitle != null ? pageTitle : 'MiniShop - Votre boutique en ligne'}</title>
 
     <!-- Bootstrap 5 CSS -->
@@ -45,7 +46,10 @@
                                 <a class="nav-link" href="${pageContext.request.contextPath}/cart">
                                     <i class="bi bi-cart"></i> Panier
                                     <c:if test="${sessionScope.cartCount > 0}">
-                                        <span class="badge bg-danger">${sessionScope.cartCount}</span>
+                                        <span class="badge bg-danger cart-count-badge">${sessionScope.cartCount}</span>
+                                    </c:if>
+                                    <c:if test="${sessionScope.cartCount == null || sessionScope.cartCount == 0}">
+                                        <span class="badge bg-danger cart-count-badge" style="display: none;"></span>
                                     </c:if>
                                 </a>
                             </li>
@@ -62,6 +66,12 @@
                             </li>
                         </c:when>
                         <c:otherwise>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" onclick="showGuestCartInfo(); return false;">
+                                    <i class="bi bi-cart"></i> Panier
+                                    <span class="badge bg-danger cart-count-badge" style="display: none;"></span>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/login">
                                     <i class="bi bi-box-arrow-in-right"></i> Connexion

@@ -155,11 +155,32 @@
                                     </form>
                                 </c:when>
                                 <c:otherwise>
-                                    <a href="${pageContext.request.contextPath}/login?redirect=/product?id=${product.id}"
-                                       class="btn btn-primary btn-lg">
-                                        <i class="bi bi-box-arrow-in-right me-2"></i>
-                                        Connectez-vous pour acheter
-                                    </a>
+                                    <!-- Guest cart - Add to localStorage -->
+                                    <div class="guest-cart-section">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">Quantité</span>
+                                            <input type="number"
+                                                   id="guestQuantity"
+                                                   class="form-control"
+                                                   value="1"
+                                                   min="1"
+                                                   max="${product.stock}">
+                                            <button type="button"
+                                                    class="btn btn-primary btn-lg"
+                                                    onclick="addToGuestCartFromPage()">
+                                                <i class="bi bi-cart-plus me-2"></i>
+                                                Ajouter au panier
+                                            </button>
+                                        </div>
+                                        <small class="text-muted">
+                                            <i class="bi bi-info-circle me-1"></i>
+                                            Article ajouté à votre panier invité.
+                                            <a href="${pageContext.request.contextPath}/login?redirect=/product?id=${product.id}">
+                                                Connectez-vous
+                                            </a>
+                                            pour finaliser votre commande.
+                                        </small>
+                                    </div>
                                 </c:otherwise>
                             </c:choose>
                         </c:when>
@@ -239,5 +260,34 @@
         </div>
     </div>
 </div>
+
+<!-- Guest cart scripts -->
+<script src="${pageContext.request.contextPath}/assets/js/cart-local.js"></script>
+<script>
+// Add to guest cart function
+function addToGuestCartFromPage() {
+    const quantityInput = document.getElementById('guestQuantity');
+    const quantity = parseInt(quantityInput?.value || 1);
+    const productId = ${product.id};
+    const productName = "${product.name}";
+    const price = ${product.priceCents};
+
+    if (quantity > 0 && window.MiniShopGuestCart) {
+        const success = window.MiniShopGuestCart.add(productId, quantity, productName, price);
+
+        if (success) {
+            window.MiniShopGuestCart.showNotification(
+                'Produit ajouté à votre panier invité ! Connectez-vous pour finaliser votre commande.',
+                'success'
+            );
+        } else {
+            window.MiniShopGuestCart.showNotification(
+                'Erreur lors de l\'ajout au panier',
+                'danger'
+            );
+        }
+    }
+}
+</script>
 
 <%@ include file="/WEB-INF/jsp/common/footer.jspf" %>

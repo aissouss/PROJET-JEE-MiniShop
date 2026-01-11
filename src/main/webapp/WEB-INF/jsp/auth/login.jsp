@@ -173,4 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<!-- Cart merge script -->
+<script src="${pageContext.request.contextPath}/assets/js/cart-merge.js"></script>
+
 <%@ include file="/WEB-INF/jsp/common/footer.jspf" %>
