@@ -29,7 +29,7 @@
     </c:if>
 
     <c:choose>
-        <c:when test="${empty cart or cart.empty}">
+        <c:when test="${empty cart or empty cart.items}">
             <div class="card border-0 shadow-sm text-center py-5">
                 <div class="card-body">
                     <i class="bi bi-cart-x display-1 text-muted mb-4"></i>
